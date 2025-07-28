@@ -1,1 +1,4 @@
 pygame
+check50
+style50
+submit50
