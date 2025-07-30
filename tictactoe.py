@@ -70,14 +70,14 @@ def actions(board):
     # [(0, 0), (0, 2), (1, 0), (1, 1), (2, 0)]
 
 
-    moves = []
+    actions = []
 
     for row in range(len(board)):
         for cell in range(len(board[row])):
             if board[row][cell] == None:
-                moves.append((row, cell))
+                actions.append((row, cell))
 
-    return moves
+    return actions
 
     # refactor to use (i,j) like in the instructions and in runner:88 (board[i][j])
 
@@ -89,16 +89,18 @@ def result(board, action):
     Returns the board that results from making move (i, j) on the board.
     *i is the board, and j is the move runner:121
 
-    board = [[X, None, None], [None, None, None], [None, None, None]]
-    action = (0,2)
-    return [[X, None, O], [None, None, None], [None, None, None]]
-
-
-
-    
-
+    board = [['X', None, 'X'], ['X', 'O', None], ['O', None, None]]
+    action = (0,1)
+    return [['X', 'X', 'X'], ['X', 'O', None], ['O', None, None]]
 
     """
+    # (Pdb) moves (actions)
+    # [(0, 1), (1, 2), (2, 1), (2, 2)]
+    # (Pdb) board
+    # [['X', None, 'X'], ['X', 'O', None], ['O', None, None]]
+    # (Pdb)
+
+
 
     pdb.set_trace()
 
