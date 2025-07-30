@@ -3,6 +3,9 @@ Tic Tac Toe Player
 """
 
 import math
+import pdb
+
+# pdb.set_trace()
 
 X = "X"
 O = "O"
@@ -13,7 +16,7 @@ def initial_state():
     """
     Returns starting state of the board.
     """
-    return [[EMPTY, EMPTY, EMPTY],
+    return [["X", EMPTY, EMPTY], #REMEMBER TO CHANGE THIS BACK TO EMPTY
             [EMPTY, EMPTY, EMPTY],
             [EMPTY, EMPTY, EMPTY]]
 
@@ -22,6 +25,18 @@ def player(board):
     """
     Returns player who has the next turn on a board.
     """
+
+    # x = 0
+    # o = 0
+    # pdb.set_trace()
+    # for row in board:
+    #     row.count("X") += x
+    #     row.count("O") += O
+
+
+    # runner uses ttt.X and ttt.O
+    # Start with Terminal because that's the first method hit.
+
     raise NotImplementedError
 
 
@@ -50,6 +65,18 @@ def terminal(board):
     """
     Returns True if game is over, False otherwise.
     """
+
+    pdb.set_trace()
+
+
+    # 1,2,3
+    # 4,5,6
+    # 7,8,9
+    # Winning solutions are: rows the same, columns the same, & 1,5,9 or 3,5,6
+
+
+
+
     raise NotImplementedError
 
 

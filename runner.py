@@ -1,6 +1,9 @@
 import pygame
 import sys
 import time
+import pdb
+
+# pdb.set_trace()
 
 import tictactoe as ttt
 
@@ -88,6 +91,8 @@ while True:
                     screen.blit(move, moveRect)
                 row.append(rect)
             tiles.append(row)
+
+        pdb.set_trace()
 
         game_over = ttt.terminal(board)
         player = ttt.player(board)
