@@ -74,10 +74,12 @@ def actions(board):
 
     for row in range(len(board)):
         for cell in range(len(board[row])):
-            if board[row][cell] != None:
+            if board[row][cell] == None:
                 moves.append((row, cell))
 
     return moves
+
+    # refactor to use (i,j) like in the instructions and in runner:88 (board[i][j])
 
 
 
@@ -88,9 +90,10 @@ def result(board, action):
     *i is the board, and j is the move runner:121
 
     board = [[X, None, None], [None, None, None], [None, None, None]]
-    action = [[None, None, O], [None, None, None], [None, None, None]]
-
+    action = (0,2)
     return [[X, None, O], [None, None, None], [None, None, None]]
+
+
 
     
 
