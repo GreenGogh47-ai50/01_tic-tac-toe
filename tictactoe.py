@@ -128,7 +128,12 @@ def winner(board):
     **Do the terminal method before this**
     """
     # raise NotImplementedError
+    #  return player(board) -- nope that returns the opposite.
 
+    if player(board) == X:
+        return O
+    else:
+        return X
 
 def terminal(board):
     """
