@@ -60,13 +60,22 @@ def actions(board):
     # ...             print(row, cell)
     # ...   
     # *** TypeError: object of type 'int' has no len()
+
+    # (Pdb)     for row in range(len(board)):
+    # ...           for cell in range(len(board[row])):
+    # ...               if board[row][cell] != None:
+    # ...                   moves.append((row, cell))
+    # ...   
+    # (Pdb) moves
+    # [(0, 0), (0, 2), (1, 0), (1, 1), (2, 0)]
+
+
     moves = []
 
     for row in range(len(board)):
         for cell in range(len(board[row])):
-            moves.append((row, cell))
-
-    
+            if board[row][cell] != None:
+                moves.append((row, cell))
 
     return moves
 
