@@ -4,6 +4,7 @@ Tic Tac Toe Player
 
 import math
 import pdb
+import random
 
 # pdb.set_trace()
 
@@ -16,13 +17,17 @@ def initial_state():
     """
     Returns starting state of the board.
     """
-    return [[X, EMPTY, X], #REMEMBER TO CHANGE THIS BACK TO EMPTY
-            [X, O, EMPTY],
-            [O, EMPTY, EMPTY]]
+    # return [[X, O, X], #This set is for texting. O's next move. (0,1) is the correct next move.
+    #         [O, O, X],
+    #         [EMPTY, X, X]]
 
-    # return [[EMPTY, EMPTY, EMPTY],
-    #         [EMPTY, EMPTY, EMPTY],
-    #         [EMPTY, EMPTY, EMPTY]]
+    # return [[X, O, EMPTY],
+    #         [X, O, X],
+    #         [O, O, X]]
+
+    return [[EMPTY, EMPTY, EMPTY],
+            [EMPTY, EMPTY, EMPTY],
+            [EMPTY, EMPTY, EMPTY]]
 
 
 def player(board):
@@ -44,10 +49,7 @@ def player(board):
 def actions(board):
     """
     Returns set of all possible actions (i, j) available on the board.
-    *i is the board, and j is the move runner:121
-    *this method isn't used in the runner - so it's options for the minimax
     """
-    raise NotImplementedError
 
     # (Pdb) board
     # [['X', None, 'X'], ['X', 'O', None], ['O', None, None]]
@@ -87,12 +89,6 @@ def actions(board):
 def result(board, action):
     """
     Returns the board that results from making move (i, j) on the board.
-    *i is the board, and j is the move runner:121
-
-    board = [['X', None, 'X'], ['X', 'O', None], ['O', None, None]]
-    action = (0,1)
-    return [['X', 'X', 'X'], ['X', 'O', None], ['O', None, None]]
-
     """
     # (Pdb) moves (actions)
     # [(0, 1), (1, 2), (2, 1), (2, 2)]
@@ -100,10 +96,28 @@ def result(board, action):
     # [['X', None, 'X'], ['X', 'O', None], ['O', None, None]]
     # (Pdb)
 
+    # (Pdb) board[0]
+    # ['X', None, 'X']
+    # (Pdb) board[0][0]
+    # 'X'
+    # (Pdb) board[0][1]
+    # (Pdb) board[0][1] = moves[0]
+    # (Pdb) board
+    # [['X', (0, 1), 'X'], ['X', 'O', None], ['O', None, None]]
+    # lol - no
 
+    # (Pdb) board[row][cell] = ttt.player(board) /// ttt because pry (Pdb) is in the runner.
+    # (Pdb) board
+    # [['X', 'O', 'X'], ['X', 'O', None], ['O', None, None]]
 
-    pdb.set_trace()
+    current_player = player(board) #ttt.pyaler(board) while in pry (Pdb)
+    row = action[0]
+    cell = action[1]
 
+    board[row][cell] = current_player
+    return board
+
+    # pdb.set_trace()
 
 
 def winner(board):
@@ -127,13 +141,48 @@ def terminal(board):
     # 4,5,6
     # 7,8,9
     # Winning solutions are: rows the same, columns the same, & 1,5,9 or 3,5,6
-    # Just because we're checking that the game is over first doesn't necessarily mean
-    # That's the place to start
 
-    # For now I'll just have the game over condition as:
-    if None not in board:
-        return False
-    else:
+    if actions(board) == []:
+        return True
+
+    # Rows
+    # (Pdb)     for row in board:
+    # ...           if row[0] == row[1] == row[2] != None:
+    # ...               print("true") # True
+    # ...           else:
+    # ...               print("false") # return False
+    # ...   
+    # true
+    # false
+    # false
+    # (Pdb) 
+
+    for row in board:
+        if row[0] == row[1] == row[2] != None:
+            return True
+
+    # #Columns Notes
+    # if board[0,0] == board[0,1] == board[0,2]!= None:
+    #     print("true")
+    # if board[0,0] == board[0,1] == board[0,2]!= None:
+    #     print("true")
+    # if board[0,0] == board[0,1] == board[0,2]!= None:
+    #     print("true")
+    # else:
+    #     print("false")
+
+    # Same issue, can't call tuples in this way.
+
+    #Columns
+    for cell in range(3):
+        if board[0][cell] == board[1][cell] == board[2][cell] != None:
+            return True
+
+    #Diagonals
+    if board[0][0] == board[1][1] == board[2][2] != None:
+        return True
+
+    if board[0][2] == board[1][1] == board[2][0] != None:
         return True
 
 
@@ -144,7 +193,7 @@ def utility(board):
     I think this would just be a case statement
     Do this after winner
     """
-    raise NotImplementedError
+    # raise NotImplementedError
 
 
 def minimax(board):
@@ -152,4 +201,4 @@ def minimax(board):
     Returns the optimal action for the current player on the board.
     This will be done last.
     """
-    raise NotImplementedError
+    return random.choice(actions(board))

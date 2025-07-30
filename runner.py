@@ -92,7 +92,7 @@ while True:
                 row.append(rect)
             tiles.append(row)
 
-        pdb.set_trace()
+        # pdb.set_trace()
 
         game_over = ttt.terminal(board)
         player = ttt.player(board)
