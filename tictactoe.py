@@ -76,7 +76,7 @@ def actions(board):
 
     for row in range(len(board)):
         for cell in range(len(board[row])):
-            if board[row][cell] == None:
+            if board[row][cell] == EMPTY:
                 all_actions.add((row, cell))
 
     # pdb.set_trace()
@@ -113,9 +113,17 @@ def result(board, action):
     # deep copy to prevent mutation while minimax iterates.
     new_board = copy.deepcopy(board)
     row = action[0]
-    cell = action[1]
+    column = action[1]
+    
+    ####### Exception Handling
+    if not (0 <= row < 3) or not (0 <= column < 3):
+        raise Exception("Out of bounds")
 
-    new_board[row][cell] = current_player
+    if board[row][column] != EMPTY:
+        raise Exception("Cell taken")
+    #######
+
+    new_board[row][column] = current_player
     return new_board
 
     # pdb.set_trace()
@@ -138,19 +146,19 @@ def winner(board):
     #     return X
 
     for row in board:
-        if row[0] == row[1] == row[2] != None:
+        if row[0] == row[1] == row[2] != EMPTY:
             return row[0]
 
     # Columns
     for cell in range(3):
-        if board[0][cell] == board[1][cell] == board[2][cell] != None:
+        if board[0][cell] == board[1][cell] == board[2][cell] != EMPTY:
             return board[0][cell]
 
     # Diagonals
-    if board[0][0] == board[1][1] == board[2][2] != None:
+    if board[0][0] == board[1][1] == board[2][2] != EMPTY:
         return board[0][0]
 
-    if board[0][2] == board[1][1] == board[2][0] != None:
+    if board[0][2] == board[1][1] == board[2][0] != EMPTY:
         return board[0][2]
 
 
@@ -182,7 +190,7 @@ def terminal(board):
     # (Pdb) 
 
     for row in board:
-        if row[0] == row[1] == row[2] != None:
+        if row[0] == row[1] == row[2] != EMPTY:
             return True
 
     # Columns Notes
@@ -199,14 +207,14 @@ def terminal(board):
 
     # Columns
     for cell in range(3):
-        if board[0][cell] == board[1][cell] == board[2][cell] != None:
+        if board[0][cell] == board[1][cell] == board[2][cell] != EMPTY:
             return True
 
     # Diagonals
-    if board[0][0] == board[1][1] == board[2][2] != None:
+    if board[0][0] == board[1][1] == board[2][2] != EMPTY:
         return True
 
-    if board[0][2] == board[1][1] == board[2][0] != None:
+    if board[0][2] == board[1][1] == board[2][0] != EMPTY:
         return True
 
 
@@ -242,7 +250,7 @@ def minimax(board):
 
     # "If the `board` is a terminal board, the `minimax` function should return `None`."
     if terminal(board):
-        return None
+        return EMPTY
 
     # 1. Who's playing?
     current_player = player(board)
