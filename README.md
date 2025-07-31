@@ -24,9 +24,42 @@ The main components are:
 - Terminal: Defines when the game "termintates"/ends. Either 3 in a row, or all the squares are filled.
 - Utility: Assigning a numerical value to a win (1), tie (0), or loss (-1).
 
+### Minimax
 The MAX player ('X') tries to maximise the score, and shoots for a value of 1. The MIN player ('O') wants to minimize the score, because it's goal is -1. If a player can't win, then they'll aim for a tie instead. To choose that best move, we simulate every possible move from the current board. For each move, we simulate the opponent’s best possible response. And then our best response to that. And so on, until we reach a final board (win/loss/tie), and assign it a utility.
 
+### Copying the board
 While working on the minimax method, I got to a point where the board would immediately populate a bunch of moves and end the game. Clearly when it's running through the simulated moves, it's actually mutating my existing board. Python has a deepcopy method that I can import.
+
+### "I can't lose"
+Once I had the minimax function "working", the ai would only pick the 'next' unoccupied cell ((0,0), (0,1), (0,2), (1,0), ect.). Printing the evaluations to the console gave some interesting results.
+
+```bash
+Evaluating move (0, 0) → score: 1
+Evaluating move (0, 0) → score: 1
+Evaluating move (1, 0) → score: 1
+Evaluating move (0, 1) → score: 1
+Evaluating move (0, 1) → score: 1
+Evaluating move (0, 0) → score: 1
+Evaluating move (0, 0) → score: 1
+Evaluating move (0, 1) → score: 1
+Evaluating move (1, 0) → score: 1
+Evaluating move (0, 2) → score: 1
+Evaluating move (0, 0) → score: 1
+Evaluating move (0, 2) → score: 1
+Evaluating move (0, 0) → score: 1
+Evaluating move (0, 0) → score: 1
+Evaluating move (0, 2) → score: 1
+Evaluating move (0, 1) → score: 1
+Evaluating move (0, 2) → score: 1
+Evaluating move (1, 0) → score: 1
+Evaluating move (1, 1) → score: 1
+Evaluating move (1, 2) → score: 1
+Evaluating move (2, 0) → score: 1
+```
+
+I changed my win method to mirror my terminal method, and it's performing *more* optimally now. However, when I play as `O`, `X` will run through all available moves, and pick (0,0). But when I play as `O`, it will pick the center every time. If the options are equal, it'll pick the first one.
+
+
 
 # Project Specifications
 Complete the implementations of `player`, `actions`, `result`, `winner`, `terminal`, `utility`, and `minimax`.
