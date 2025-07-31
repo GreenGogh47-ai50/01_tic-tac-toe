@@ -22,7 +22,7 @@ def initial_state():
     #         ['X', 'O', EMPTY],
     #         ['O', EMPTY, EMPTY]]
 
-    # return [[X, O, EMPTY],
+    # return [[X, X, O],
     #         [X, O, X],
     #         [O, O, X]]
 
@@ -79,7 +79,6 @@ def actions(board):
             if board[row][cell] == EMPTY:
                 all_actions.add((row, cell))
 
-    # pdb.set_trace()
     return all_actions
 
     # refactor to use (i,j) like in the instructions and in runner:88 (board[i][j])
@@ -174,8 +173,10 @@ def terminal(board):
     # 7,8,9
     # Winning solutions are: rows the same, columns the same, & 1,5,9 or 3,5,6
 
-    if actions(board) == {}:
+    if actions(board) == set():
         return True
+    else:
+        return False
 
     # Rows
     # (Pdb)     for row in board:
@@ -309,14 +310,14 @@ def minimax_utility(board):
         for action in actions(board):
             # pick the value CLOSEST to 1 (furthest from -inf)
             v = max(v, minimax_utility(result(board, action)))
-            print(f"Evaluating move {action} → score: {v}")
+            # print(f"Evaluating move {action} → score: {v}")
         return v
     else:
         v = float('inf')
         for action in actions(board):
             # pick the value CLOSEST to -1 (furthest from +inf)
             v = min(v, minimax_utility(result(board, action)))
-            print(f"Evaluating move {action} → score: {v}")
+            # print(f"Evaluating move {action} → score: {v}")
         return v
 
 
