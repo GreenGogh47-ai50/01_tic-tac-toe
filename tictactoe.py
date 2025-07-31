@@ -72,17 +72,18 @@ def actions(board):
     # (Pdb) moves
     # [(0, 0), (0, 2), (1, 0), (1, 1), (2, 0)]
 
-    actions = []
+    actions = {}
 
     for row in range(len(board)):
         for cell in range(len(board[row])):
             if board[row][cell] == None:
                 actions.append((row, cell))
 
+    pdb.set_trace()
     return actions
 
     # refactor to use (i,j) like in the instructions and in runner:88 (board[i][j])
-    
+
 
 def result(board, action):
     """
