@@ -15,10 +15,19 @@ Test: `make test`
 Submit: `make submit`
 
 ## Notes and Explanations
-Using Minimax, implement an AI to play Tic-Tac-Toe optimally.
+At first I was confused and tried to use a frontier and an explored stack, because that's how it was done in the last project. But since we're using a recursive function, those options and path are stored in memory during the recursive process.
+
+The main components are:
+- An initial state (of the board)
+- Players: 'X' and 'O'.
+- Result: How the board looks after a move is made.
+- Terminal: Defines when the game "termintates"/ends. Either 3 in a row, or all the squares are filled.
+- Utility: Assigning a numerical value to a win (1), tie (0), or loss (-1).
+
+The MAX player ('X') tries to maximise the score, and shoots for a value of 1. The MIN player ('O') wants to minimize the score, because it's goal is -1. If a player can't win, then they'll aim for a tie instead. To choose that best move, we simulate every possible move from the current board. For each move, we simulate the opponent’s best possible response. And then our best response to that. And so on, until we reach a final board (win/loss/tie), and assign it a utility.
 
 
-# Specification
+# Project Specifications
 Complete the implementations of `player`, `actions`, `result`, `winner`, `terminal`, `utility`, and `minimax`.
 
 - The `player` function should take a `board` state as input, and return which player’s turn it is (either `X` or `O`).
