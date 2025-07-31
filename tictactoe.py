@@ -209,24 +209,62 @@ def utility(board):
 
 def minimax(board):
     """
+- [x] If the `board` is a terminal board, the `minimax` function should return `None`.
 - [ ] The `minimax` function should take a `board` as input, and return
     the optimal move for the player to move on that `board`.
 - [ ] The move returned should be the optimal action `(i, j)`
     that is one of the allowable `actions` on the `board`.
     If multiple moves are equally optimal,
     any of those moves is acceptable.
-- [x] If the `board` is a terminal board, the `minimax` function
-    should return `None`.
 
     Returns the optimal action for the CURRENT PLAYER on the board.
     """
     # return random.choice(actions(board))
     # randomizer so I could check if everything else worked.
 
+    # "If the `board` is a terminal board, the `minimax` function should return `None`."
     if terminal(board):
         return None
 
-    
+    # 1. Who's playing?
+    current_player = player(board)
+
+    # 2. Current players objective
+    if current_player == "X":
+        floor = float('-inf')
+    else:
+        floor = float('inf')
+
+
+    for action in actions(board):
+            
+
+        
+
+# 1. Who's playing? player(board)
+#  2. What's their objective?
+# Is the game over?
+# If the game is over, what's the score? utility(board)
+# What are all the possible moves? actions(board)
+# What does the board look like after a move? result(board, action)
 
 
 
+'''
+In order to figure out your move, you have to know what the opponent will do next,
+meaning you need to know what you will do next,
+meaning you need to know what they will do next,
+ect until the game ends. And depending on how that tree resolves,
+it's either a win, loss, or tie (1, -1, or 0).
+The max player (x) wants to maximize the score,
+and the min player tries to minimize it.
+
+x wants to beat negative infinity
+and o wants to be infinity
+I need 2 different methods
+I've been playing x so I'm going to start with o's method.
+
+
+    # FROM CLASS NOTES
+    # v = MAX(v, NIN-VALUE(RESULT(state, action)))
+    # 	return v
