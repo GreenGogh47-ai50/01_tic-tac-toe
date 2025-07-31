@@ -5,6 +5,7 @@ Tic Tac Toe Player
 import math
 import pdb
 import random
+import copy
 
 # pdb.set_trace()
 
@@ -17,17 +18,17 @@ def initial_state():
     """
     Returns starting state of the board.
     """
-    return [['X', EMPTY, 'X'],
-            ['X', 'O', EMPTY],
-            ['O', EMPTY, EMPTY]]
+    # return [['X', EMPTY, 'X'],
+    #         ['X', 'O', EMPTY],
+    #         ['O', EMPTY, EMPTY]]
 
     # return [[X, O, EMPTY],
     #         [X, O, X],
     #         [O, O, X]]
 
-    # return [[EMPTY, EMPTY, EMPTY],
-    #         [EMPTY, EMPTY, EMPTY],
-    #         [EMPTY, EMPTY, EMPTY]]
+    return [[EMPTY, EMPTY, EMPTY],
+            [EMPTY, EMPTY, EMPTY],
+            [EMPTY, EMPTY, EMPTY]]
 
 
 def player(board):
@@ -111,11 +112,13 @@ def result(board, action):
     # [['X', 'O', 'X'], ['X', 'O', None], ['O', None, None]]
 
     current_player = player(board) #ttt.pyaler(board) while in pry (Pdb)
+    # deep copy to prevent mutation while minimax iterates.
+    new_board = copy.deepcopy(board)
     row = action[0]
     cell = action[1]
 
-    board[row][cell] = current_player
-    return board
+    new_board[row][cell] = current_player
+    return new_board
 
     # pdb.set_trace()
 

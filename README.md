@@ -26,6 +26,7 @@ The main components are:
 
 The MAX player ('X') tries to maximise the score, and shoots for a value of 1. The MIN player ('O') wants to minimize the score, because it's goal is -1. If a player can't win, then they'll aim for a tie instead. To choose that best move, we simulate every possible move from the current board. For each move, we simulate the opponent’s best possible response. And then our best response to that. And so on, until we reach a final board (win/loss/tie), and assign it a utility.
 
+While working on the minimax method, I got to a point where the board would immediately populate a bunch of moves and end the game. Clearly when it's running through the simulated moves, it's actually mutating my existing board. Python has a deepcopy method that I can import.
 
 # Project Specifications
 Complete the implementations of `player`, `actions`, `result`, `winner`, `terminal`, `utility`, and `minimax`.
