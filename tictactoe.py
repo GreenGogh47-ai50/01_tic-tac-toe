@@ -17,17 +17,17 @@ def initial_state():
     """
     Returns starting state of the board.
     """
-    # return [[X, O, X], #This set is for texting. O's next move. (0,1) is the correct next move.
-    #         [O, O, X],
-    #         [EMPTY, X, X]]
+    return [['X', EMPTY, 'X'],
+            ['X', 'O', EMPTY],
+            ['O', EMPTY, EMPTY]]
 
     # return [[X, O, EMPTY],
     #         [X, O, X],
     #         [O, O, X]]
 
-    return [[EMPTY, EMPTY, EMPTY],
-            [EMPTY, EMPTY, EMPTY],
-            [EMPTY, EMPTY, EMPTY]]
+    # return [[EMPTY, EMPTY, EMPTY],
+    #         [EMPTY, EMPTY, EMPTY],
+    #         [EMPTY, EMPTY, EMPTY]]
 
 
 def player(board):
@@ -195,15 +195,38 @@ def terminal(board):
 def utility(board):
     """
     Returns 1 if X has won the game, -1 if O has won, 0 otherwise.
-    I think this would just be a case statement
-    Do this after winner
+    You may assume `utility` will only be called on a `board`
+    if `terminal(board)` is `True`. (oh man thank you.)
     """
-    # raise NotImplementedError
+
+    if winner(board) == X:
+        return 1
+    if winner(board) == O:
+        return -1
+    else:
+        return 0
 
 
 def minimax(board):
     """
-    Returns the optimal action for the current player on the board.
-    This will be done last.
+- [ ] The `minimax` function should take a `board` as input, and return
+    the optimal move for the player to move on that `board`.
+- [ ] The move returned should be the optimal action `(i, j)`
+    that is one of the allowable `actions` on the `board`.
+    If multiple moves are equally optimal,
+    any of those moves is acceptable.
+- [x] If the `board` is a terminal board, the `minimax` function
+    should return `None`.
+
+    Returns the optimal action for the CURRENT PLAYER on the board.
     """
-    return random.choice(actions(board))
+    # return random.choice(actions(board))
+    # randomizer so I could check if everything else worked.
+
+    if terminal(board):
+        return None
+
+    
+
+
+
