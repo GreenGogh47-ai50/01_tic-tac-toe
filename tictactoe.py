@@ -160,6 +160,8 @@ def winner(board):
     if board[0][2] == board[1][1] == board[2][0] != EMPTY:
         return board[0][2]
 
+    return None
+
 
 def terminal(board):
     """
@@ -173,6 +175,9 @@ def terminal(board):
     # 7,8,9
     # Winning solutions are: rows the same, columns the same, & 1,5,9 or 3,5,6
 
+    ### I needed to check if there was a winner BEFORE I check if the board is full.
+    if winner(board) is not EMPTY:
+        return True
     if actions(board) == set():
         return True
     else:
@@ -190,9 +195,12 @@ def terminal(board):
     # false
     # (Pdb) 
 
-    for row in board:
-        if row[0] == row[1] == row[2] != EMPTY:
-            return True
+
+    ########## This has been moved to the winner logic 
+
+    # for row in board:
+    #     if row[0] == row[1] == row[2] != EMPTY:
+    #         return True
 
     # Columns Notes
     # if board[0,0] == board[0,1] == board[0,2]!= None:
@@ -206,17 +214,17 @@ def terminal(board):
 
     # Same issue, can't call tuples in this way.
 
-    # Columns
-    for cell in range(3):
-        if board[0][cell] == board[1][cell] == board[2][cell] != EMPTY:
-            return True
+    # # Columns
+    # for cell in range(3):
+    #     if board[0][cell] == board[1][cell] == board[2][cell] != EMPTY:
+    #         return True
 
-    # Diagonals
-    if board[0][0] == board[1][1] == board[2][2] != EMPTY:
-        return True
+    # # Diagonals
+    # if board[0][0] == board[1][1] == board[2][2] != EMPTY:
+    #     return True
 
-    if board[0][2] == board[1][1] == board[2][0] != EMPTY:
-        return True
+    # if board[0][2] == board[1][1] == board[2][0] != EMPTY:
+    #     return True
 
 
 def utility(board):
