@@ -44,7 +44,7 @@ def player(board):
         x += row.count("X")
         o += row.count("O")
 
-    return O if x>o else X
+    return O if x > o else X
 
 
 def actions(board):
@@ -72,7 +72,6 @@ def actions(board):
     # (Pdb) moves
     # [(0, 0), (0, 2), (1, 0), (1, 1), (2, 0)]
 
-
     actions = []
 
     for row in range(len(board)):
@@ -83,9 +82,7 @@ def actions(board):
     return actions
 
     # refactor to use (i,j) like in the instructions and in runner:88 (board[i][j])
-
-
-
+    
 
 def result(board, action):
     """
@@ -111,7 +108,7 @@ def result(board, action):
     # (Pdb) board
     # [['X', 'O', 'X'], ['X', 'O', None], ['O', None, None]]
 
-    current_player = player(board) #ttt.pyaler(board) while in pry (Pdb)
+    current_player = player(board)  # ttt.pyaler(board) while in pry (Pdb)
     # deep copy to prevent mutation while minimax iterates.
     new_board = copy.deepcopy(board)
     row = action[0]
@@ -143,17 +140,18 @@ def winner(board):
         if row[0] == row[1] == row[2] != None:
             return row[0]
 
-    #Columns
+    # Columns
     for cell in range(3):
         if board[0][cell] == board[1][cell] == board[2][cell] != None:
             return board[0][cell]
 
-    #Diagonals
+    # Diagonals
     if board[0][0] == board[1][1] == board[2][2] != None:
         return board[0][0]
 
     if board[0][2] == board[1][1] == board[2][0] != None:
         return board[0][2]
+
 
 def terminal(board):
     """
@@ -186,7 +184,7 @@ def terminal(board):
         if row[0] == row[1] == row[2] != None:
             return True
 
-    # #Columns Notes
+    # Columns Notes
     # if board[0,0] == board[0,1] == board[0,2]!= None:
     #     print("true")
     # if board[0,0] == board[0,1] == board[0,2]!= None:
@@ -198,18 +196,17 @@ def terminal(board):
 
     # Same issue, can't call tuples in this way.
 
-    #Columns
+    # Columns
     for cell in range(3):
         if board[0][cell] == board[1][cell] == board[2][cell] != None:
             return True
 
-    #Diagonals
+    # Diagonals
     if board[0][0] == board[1][1] == board[2][2] != None:
         return True
 
     if board[0][2] == board[1][1] == board[2][0] != None:
         return True
-
 
 
 def utility(board):
@@ -232,7 +229,7 @@ def minimax(board):
 - [x] If the `board` is a terminal board, the `minimax` function should return `None`.
 - [x] The `minimax` function should take a `board` as input, and return
     the OPTIMAL MOVE for the player to move on that `board`.
-- [ ] The move returned should be the optimal action `(i, j)`
+- [x] The move returned should be the optimal action `(i, j)`
     that is one of the allowable `actions` on the `board`.
     If multiple moves are equally optimal,
     any of those moves is acceptable.
@@ -249,13 +246,12 @@ def minimax(board):
     # 1. Who's playing?
     current_player = player(board)
 
-
     # 2. Current players objective
     if current_player == "X":
-        #The best utility STARTS at -infinity for X
+        # The best utility STARTS at -infinity for X
         best_utility = float('-inf')
     else:
-        #The best utility STARTS at infinity for O
+        # The best utility STARTS at infinity for O
         best_utility = float('inf')
 
     # Tracking the optimal move
@@ -286,13 +282,8 @@ def minimax(board):
                 best_utility = value
                 optimal_move = action
 
-
-
-
-        # 6. Which is the best move?
-    
+    # 6. Which is the best move?
     return optimal_move
-
 
 
 def minimax_utility(board):
@@ -328,8 +319,6 @@ def minimax_utility(board):
 # Is the game over?
 # If the game is over, what's the score? utility(board)
 
-
-
 """
 In order to figure out your move, you have to know what the opponent will do next,
 meaning you need to know what you will do next,
@@ -342,7 +331,6 @@ and the min player tries to minimize it.
 x wants to beat negative infinity
 and o wants to be infinity
 I need another method so I can call it recursively
-
 
     # FROM CLASS NOTES
     # v = MAX(v, MIN-VALUE(RESULT(state, action)))
