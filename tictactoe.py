@@ -72,15 +72,15 @@ def actions(board):
     # (Pdb) moves
     # [(0, 0), (0, 2), (1, 0), (1, 1), (2, 0)]
 
-    actions = {}
+    all_actions = set()
 
     for row in range(len(board)):
         for cell in range(len(board[row])):
             if board[row][cell] == None:
-                actions.append((row, cell))
+                all_actions.add((row, cell))
 
-    pdb.set_trace()
-    return actions
+    # pdb.set_trace()
+    return all_actions
 
     # refactor to use (i,j) like in the instructions and in runner:88 (board[i][j])
 
@@ -166,7 +166,7 @@ def terminal(board):
     # 7,8,9
     # Winning solutions are: rows the same, columns the same, & 1,5,9 or 3,5,6
 
-    if actions(board) == []:
+    if actions(board) == {}:
         return True
 
     # Rows
