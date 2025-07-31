@@ -114,7 +114,7 @@ def result(board, action):
     row = action[0]
     column = action[1]
     
-    ####### Exception Handling
+    # Exception Handling
     if not (0 <= row < 3) or not (0 <= column < 3):
         raise Exception("Out of bounds")
 
@@ -175,7 +175,7 @@ def terminal(board):
     # 7,8,9
     # Winning solutions are: rows the same, columns the same, & 1,5,9 or 3,5,6
 
-    ### I needed to check if there was a winner BEFORE I check if the board is full.
+    # I needed to check if there was a winner BEFORE I check if the board is full.
     if winner(board) is not EMPTY:
         return True
     if actions(board) == set():
@@ -195,8 +195,7 @@ def terminal(board):
     # false
     # (Pdb) 
 
-
-    ########## This has been moved to the winner logic 
+    # This has been moved to the winner logic 
 
     # for row in board:
     #     if row[0] == row[1] == row[2] != EMPTY:
